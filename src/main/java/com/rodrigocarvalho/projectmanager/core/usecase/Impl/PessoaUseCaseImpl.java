@@ -11,8 +11,8 @@ import java.util.Objects;
 public class PessoaUseCaseImpl implements PessoaUseCase {
     private final PessoaProvider provider;
 
-    public PessoaUseCaseImpl(PessoaProvider insertPessoa) {
-        this.provider = insertPessoa;
+    public PessoaUseCaseImpl(PessoaProvider provider) {
+        this.provider = provider;
     }
 
     @Override
@@ -32,13 +32,13 @@ public class PessoaUseCaseImpl implements PessoaUseCase {
 
     @Override
     public Pessoa update(Pessoa pessoa) {
-        findById(pessoa.getId());
+        provider.findById(pessoa.getId());
         return provider.update(pessoa);
     }
 
     @Override
     public void delete(BigInteger id) {
-        findById(id);
+        provider.findById(id);
         provider.delete(id);
     }
 }

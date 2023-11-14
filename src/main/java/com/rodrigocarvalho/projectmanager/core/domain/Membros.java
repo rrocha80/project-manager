@@ -1,7 +1,5 @@
 package com.rodrigocarvalho.projectmanager.core.domain;
 
-import java.math.BigInteger;
-
 public class Membros {
 
     public Membros(){}
