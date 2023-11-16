@@ -1,5 +1,6 @@
 package com.rodrigocarvalho.projectmanager.entrypoint.controller.request;
 
+import com.rodrigocarvalho.projectmanager.core.domain.Enum.CargoEnum;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -14,8 +15,11 @@ public class PessoaRequest {
     private String nome;
 
     @NotBlank
+    private CargoEnum cargo;
+
+
     private LocalDate dataNascimento;
 
-    @NotBlank
+
     private Boolean prjectFuncionario;
 }

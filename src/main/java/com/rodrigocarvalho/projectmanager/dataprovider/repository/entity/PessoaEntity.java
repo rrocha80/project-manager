@@ -1,5 +1,6 @@
 package com.rodrigocarvalho.projectmanager.dataprovider.repository.entity;
 
+import com.rodrigocarvalho.projectmanager.core.domain.Enum.CargoEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,9 +18,12 @@ public class PessoaEntity {
     @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Column(name = "datanascimento", nullable = false)
+    @Column(name = "cargo", nullable = false)
+    private CargoEnum cargo;
+
+    @Column(name = "datanascimento")
     private LocalDate dataNascimento;
 
-    @Column(name = "prjectfuncionario", nullable = false)
+    @Column(name = "prjectfuncionario")
     private Boolean prjectFuncionario;
 }

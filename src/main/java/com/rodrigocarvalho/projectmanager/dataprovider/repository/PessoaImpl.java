@@ -2,9 +2,7 @@ package com.rodrigocarvalho.projectmanager.dataprovider.repository;
 
 import com.rodrigocarvalho.projectmanager.core.dataprovider.PessoaProvider;
 import com.rodrigocarvalho.projectmanager.core.domain.Pessoa;
-import com.rodrigocarvalho.projectmanager.dataprovider.repository.entity.PessoaEntity;
 import com.rodrigocarvalho.projectmanager.dataprovider.repository.mapper.PessoaEntityMapper;
-import com.rodrigocarvalho.projectmanager.entrypoint.controller.response.PessoaResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
