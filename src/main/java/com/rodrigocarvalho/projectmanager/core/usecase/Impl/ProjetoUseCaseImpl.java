@@ -34,6 +34,7 @@ public class ProjetoUseCaseImpl implements ProjetoUseCase {
 
     @Override
     public Projeto update(Projeto projeto) {
+        findById(projeto.getId());
         return provider.update(projeto);
     }
 

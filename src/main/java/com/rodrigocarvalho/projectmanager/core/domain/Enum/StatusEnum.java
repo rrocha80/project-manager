@@ -1,7 +1,7 @@
 package com.rodrigocarvalho.projectmanager.core.domain.Enum;
 
 public enum StatusEnum {
-    EM_ANALINE("Em Análise"),
+    EM_ANALISE("Em Análise"),
     ANALISE_REALIZADA("Análise Realizada"),
     ANALISE_APROVADA("Análise Aprovada"),
     INICIADO("Iniciado"),

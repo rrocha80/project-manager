@@ -111,7 +111,7 @@ public class Projeto {
         return gerente;
     }
 
-    public void setIdGerente(Pessoa gerente) {
+    public void setGerente(Pessoa gerente) {
         this.gerente = gerente;
     }
 }

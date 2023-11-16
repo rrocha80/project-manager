@@ -23,7 +23,7 @@ public class ProjetoEntity {
     @Column(name = "data_inicio", nullable = false)
     private LocalDate dataInicio;
 
-    @Column(name = "data_previsao", nullable = false)
+    @Column(name = "data_previsao_fim", nullable = false)
     private LocalDate dataPrevisao;
 
     @Column(name = "data_fim", nullable = false)
