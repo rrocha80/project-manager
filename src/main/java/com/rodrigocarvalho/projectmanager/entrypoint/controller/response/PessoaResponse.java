@@ -1,7 +1,6 @@
 package com.rodrigocarvalho.projectmanager.entrypoint.controller.response;
 
 import com.rodrigocarvalho.projectmanager.core.domain.Enum.CargoEnum;
-import jakarta.persistence.Column;
 import lombok.Data;
 
 import java.math.BigInteger;

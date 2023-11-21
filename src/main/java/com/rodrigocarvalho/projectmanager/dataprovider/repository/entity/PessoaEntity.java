@@ -18,6 +18,7 @@ public class PessoaEntity {
     @Column(name = "nome", nullable = false)
     private String nome;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "cargo", nullable = false)
     private CargoEnum cargo;
 

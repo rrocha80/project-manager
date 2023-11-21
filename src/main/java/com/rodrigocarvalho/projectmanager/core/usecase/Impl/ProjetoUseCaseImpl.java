@@ -50,4 +50,14 @@ public class ProjetoUseCaseImpl implements ProjetoUseCase {
             default: provider.delete(id);
         }
     }
+
+    @Override
+    public List<Projeto> findByAttributes(Projeto projeto) {
+        return provider.findByAttributes(projeto);
+    }
+
+    @Override
+    public List<Projeto> findByNome(String nome) {
+        return provider.findByNome(nome);
+    }
 }

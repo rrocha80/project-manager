@@ -1,5 +1,6 @@
 package com.rodrigocarvalho.projectmanager.entrypoint.controller;
 
+import com.rodrigocarvalho.projectmanager.core.domain.Pessoa;
 import com.rodrigocarvalho.projectmanager.core.usecase.PessoaUseCase;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.mapper.PessoaMapper;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.request.PessoaRequest;
@@ -7,7 +8,6 @@ import com.rodrigocarvalho.projectmanager.entrypoint.controller.response.PessoaR
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
@@ -46,6 +46,20 @@ public class PessoaController {
         return ResponseEntity.ok().body(pessoaResponse);
     }
 
+    @GetMapping("/byattributes")
+    public ResponseEntity<List<PessoaResponse>> findbyAttributes(@RequestBody Pessoa pessoa) {
+        var pessoas = pessoaUseCase.findByAttributes(pessoa);
+        var pessoaResponse = pessoaMapper.toPessoaResponseList(pessoas);
+        return ResponseEntity.ok().body(pessoaResponse);
+    }
+
+    @GetMapping("/searchname/{nome}")
+    public ResponseEntity<List<PessoaResponse>> findById(@PathVariable final String nome) {
+        var pessoas = pessoaUseCase.findByNome(nome);
+        var pessoaResponse = pessoaMapper.toPessoaResponseList(pessoas);
+        return ResponseEntity.ok().body(pessoaResponse);
+    }
+
     @PutMapping("/update")
     public ResponseEntity<PessoaResponse> update(@Valid @RequestBody PessoaRequest pessoaRequest) {
         var pessoa = pessoaMapper.toPessoa(pessoaRequest);
@@ -60,7 +74,7 @@ public class PessoaController {
         return ResponseEntity.ok(pessoaResponse);
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable BigInteger id) {
         pessoaUseCase.delete(id);
         return ResponseEntity.ok().build();

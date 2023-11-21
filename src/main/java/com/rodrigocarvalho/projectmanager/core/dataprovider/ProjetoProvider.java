@@ -13,6 +13,10 @@ public interface ProjetoProvider {
 
     List<Projeto> findAll();
 
+    List<Projeto> findByAttributes(Projeto projeto);
+
+    List<Projeto> findByNome(String projeto);
+
     Projeto update(Projeto projeto);
 
     void delete(final BigInteger id);

@@ -1,7 +1,6 @@
 package com.rodrigocarvalho.projectmanager.entrypoint.controller.request;
 
 import com.rodrigocarvalho.projectmanager.core.domain.Enum.CargoEnum;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -9,6 +9,8 @@ public class Pessoa {
 
     public Pessoa(){}
 
+    public Pessoa(BigInteger id){this.id = id;}
+
     public Pessoa(BigInteger id, String nome, CargoEnum cargo, LocalDate dataNascimento, Boolean prjectFuncionario) {
         this.id = id;
         this.nome = nome;

@@ -13,6 +13,10 @@ public interface PessoaProvider {
 
     List<Pessoa> findAll();
 
+    List<Pessoa> findByAttributes(Pessoa pessoa);
+
+    List<Pessoa> findByNome(String pessoa);
+
     Pessoa update(Pessoa pessoa);
 
     void delete(final BigInteger id);

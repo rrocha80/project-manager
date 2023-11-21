@@ -13,8 +13,11 @@ public interface PessoaUseCase {
 
     List<Pessoa> findAll();
 
+    List<Pessoa> findByAttributes(Pessoa pessoa);
+
     Pessoa update(Pessoa pessoa);
 
     void delete(final BigInteger id);
 
+    List<Pessoa> findByNome(String nome);
 }

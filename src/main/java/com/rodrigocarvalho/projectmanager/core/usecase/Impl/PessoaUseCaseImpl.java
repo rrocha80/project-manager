@@ -30,6 +30,11 @@ public class PessoaUseCaseImpl implements PessoaUseCase {
     }
 
     @Override
+    public List<Pessoa> findByAttributes(Pessoa pessoa) {
+        return provider.findByAttributes(pessoa);
+    }
+
+    @Override
     public Pessoa update(Pessoa pessoa) {
         findById(pessoa.getId());
         return provider.update(pessoa);
@@ -39,5 +44,10 @@ public class PessoaUseCaseImpl implements PessoaUseCase {
     public void delete(BigInteger id) {
         findById(id);
         provider.delete(id);
+    }
+
+    @Override
+    public List<Pessoa> findByNome(String nome) {
+        return provider.findByNome(nome);
     }
 }

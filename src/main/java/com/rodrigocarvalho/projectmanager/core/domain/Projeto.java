@@ -10,8 +10,10 @@ public class Projeto {
 
     public Projeto(){}
 
+    public Projeto(BigInteger id){this.id = id;}
+
     public Projeto(BigInteger id, String nome, LocalDate dataInicio, LocalDate dataPrevisao, LocalDate dataFim
-            , String descricao, StatusEnum status, float orcamento, RiscoEnum risco, Pessoa gerente) {
+            , String descricao, StatusEnum status, Float orcamento, RiscoEnum risco, Pessoa gerente) {
         this.id = id;
         this.nome = nome;
         this.dataInicio = dataInicio;
@@ -31,7 +33,7 @@ public class Projeto {
     private LocalDate dataFim;
     private String descricao;
     private StatusEnum status;
-    private float orcamento;
+    private Float orcamento;
     private RiscoEnum risco;
     private Pessoa gerente;
 
@@ -91,11 +93,11 @@ public class Projeto {
         this.status = status;
     }
 
-    public float getOrcamento() {
+    public Float getOrcamento() {
         return orcamento;
     }
 
-    public void setOrcamento(float orcamento) {
+    public void setOrcamento(Float orcamento) {
         this.orcamento = orcamento;
     }
 

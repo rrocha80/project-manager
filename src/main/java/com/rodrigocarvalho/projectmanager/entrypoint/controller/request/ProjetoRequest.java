@@ -2,7 +2,6 @@ package com.rodrigocarvalho.projectmanager.entrypoint.controller.request;
 
 import com.rodrigocarvalho.projectmanager.core.domain.Enum.RiscoEnum;
 import com.rodrigocarvalho.projectmanager.core.domain.Enum.StatusEnum;
-import com.rodrigocarvalho.projectmanager.core.domain.Pessoa;
 import com.rodrigocarvalho.projectmanager.dataprovider.repository.entity.PessoaEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;

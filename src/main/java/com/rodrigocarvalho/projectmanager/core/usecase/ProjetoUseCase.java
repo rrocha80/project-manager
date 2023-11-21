@@ -15,4 +15,8 @@ public interface ProjetoUseCase {
     Projeto update(Projeto projeto);
 
     void delete(final BigInteger id);
+
+    List<Projeto> findByAttributes(Projeto projeto);
+
+    List<Projeto> findByNome(String nome);
 }

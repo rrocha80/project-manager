@@ -4,6 +4,7 @@ import com.rodrigocarvalho.projectmanager.core.dataprovider.ProjetoProvider;
 import com.rodrigocarvalho.projectmanager.core.domain.Projeto;
 import com.rodrigocarvalho.projectmanager.dataprovider.repository.mapper.ProjetoEntityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
@@ -37,6 +38,23 @@ public class ProjetoImpl implements ProjetoProvider {
         var projetos = repository.findAll();
         List<Projeto> list = new ArrayList<>();
         projetos.forEach(projetoEntity -> list.add(projetoEntityMapper.toProjeto(projetoEntity)));
+        return list;
+    }
+
+    @Override
+    public List<Projeto> findByAttributes(Projeto projeto) {
+        var projetoEntity = projetoEntityMapper.toProjetoEntity(projeto);
+        var projetos = repository.findAll(Example.of(projetoEntity));
+        List<Projeto> list = new ArrayList<>();
+        projetos.forEach(p -> list.add(projetoEntityMapper.toProjeto(p)));
+        return list;
+    }
+
+    @Override
+    public List<Projeto> findByNome(String projeto) {
+        var projetos = repository.findByNomeContaining(projeto);
+        List<Projeto> list = new ArrayList<>();
+        projetos.forEach(p -> list.add(projetoEntityMapper.toProjeto(p)));
         return list;
     }
 

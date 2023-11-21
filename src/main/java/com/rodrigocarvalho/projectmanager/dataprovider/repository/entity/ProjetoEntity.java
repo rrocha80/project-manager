@@ -32,12 +32,14 @@ public class ProjetoEntity {
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private StatusEnum status;
 
     @Column(name = "orcamento", nullable = false)
-    private float orcamento;
+    private Float orcamento;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "risco", nullable = false)
     private RiscoEnum risco;
 

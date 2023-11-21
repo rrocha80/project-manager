@@ -1,5 +1,6 @@
 package com.rodrigocarvalho.projectmanager.entrypoint.controller;
 
+import com.rodrigocarvalho.projectmanager.core.domain.Projeto;
 import com.rodrigocarvalho.projectmanager.core.usecase.ProjetoUseCase;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.mapper.ProjetoMapper;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.request.ProjetoRequest;
@@ -45,6 +46,20 @@ public class ProjetoController {
         return ResponseEntity.ok().body(projetoResponse);
     }
 
+    @GetMapping("/byattributes")
+    public ResponseEntity<List<ProjetoResponse>> findbyAttributes(@RequestBody Projeto projeto) {
+        var projetos = projetoUseCase.findByAttributes(projeto);
+        var projetoResponse = projetoMapper.toProjetoResponseList(projetos);
+        return ResponseEntity.ok().body(projetoResponse);
+    }
+
+    @GetMapping("/searchname/{nome}")
+    public ResponseEntity<List<ProjetoResponse>> findById(@PathVariable final String nome) {
+        var projetos = projetoUseCase.findByNome(nome);
+        var projetoResponse = projetoMapper.toProjetoResponseList(projetos);
+        return ResponseEntity.ok().body(projetoResponse);
+    }
+
     @PutMapping("/update")
     public ResponseEntity<ProjetoResponse> update(@Valid @RequestBody ProjetoRequest projetoRequest) {
         var projeto = projetoMapper.toProjeto(projetoRequest);
@@ -59,7 +74,7 @@ public class ProjetoController {
         return ResponseEntity.ok(projetoResponse);
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable BigInteger id) {
         projetoUseCase.delete(id);
         return ResponseEntity.ok().build();

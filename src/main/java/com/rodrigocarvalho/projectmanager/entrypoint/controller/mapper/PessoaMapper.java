@@ -4,7 +4,6 @@ import com.rodrigocarvalho.projectmanager.core.domain.Pessoa;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.request.PessoaRequest;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.response.PessoaResponse;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import java.util.List;
 
