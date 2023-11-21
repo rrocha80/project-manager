@@ -2,6 +2,7 @@ package com.rodrigocarvalho.projectmanager.core.usecase.Impl;
 
 import com.rodrigocarvalho.projectmanager.core.dataprovider.PessoaProvider;
 import com.rodrigocarvalho.projectmanager.core.domain.Pessoa;
+import com.rodrigocarvalho.projectmanager.core.exception.RecNotFountException;
 import com.rodrigocarvalho.projectmanager.core.usecase.PessoaUseCase;
 
 import java.math.BigInteger;
@@ -21,7 +22,7 @@ public class PessoaUseCaseImpl implements PessoaUseCase {
 
     @Override
     public Pessoa findById(BigInteger id) {
-        return provider.findById(id).orElseThrow(() -> new RuntimeException("Não Encontrado"));
+        return provider.findById(id).orElseThrow(() -> new RecNotFountException(id));
     }
 
     @Override

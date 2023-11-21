@@ -41,6 +41,7 @@ public class MembroController {
                                                    @PathVariable final BigInteger PessoaId) {
         var membro = membroUseCase.findById(ProjetoId, PessoaId);
         var membroResponse = membroMapper.toMembroResponse(membro);
+
         return ResponseEntity.ok().body(membroResponse);
     }
 
@@ -48,6 +49,7 @@ public class MembroController {
     public ResponseEntity<List<MembroResponse>> findAll() {
         var membros = membroUseCase.findAll();
         var pessoaResponse = membroMapper.toMembroResponseList(membros);
+
         return ResponseEntity.ok().body(pessoaResponse);
     }
 
@@ -55,7 +57,7 @@ public class MembroController {
     public ResponseEntity<Void> delete(@PathVariable final BigInteger ProjetoId,
                                        @PathVariable final BigInteger PessoaId) {
         membroUseCase.delete(ProjetoId, PessoaId);
+
         return ResponseEntity.ok().build();
     }
-
 }

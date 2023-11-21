@@ -3,6 +3,7 @@ package com.rodrigocarvalho.projectmanager.core.usecase.Impl;
 import com.rodrigocarvalho.projectmanager.core.dataprovider.ProjetoProvider;
 import com.rodrigocarvalho.projectmanager.core.domain.Enum.StatusEnum;
 import com.rodrigocarvalho.projectmanager.core.domain.Projeto;
+import com.rodrigocarvalho.projectmanager.core.exception.RecNotFountException;
 import com.rodrigocarvalho.projectmanager.core.usecase.ProjetoUseCase;
 
 import java.math.BigInteger;
@@ -24,7 +25,7 @@ public class ProjetoUseCaseImpl implements ProjetoUseCase {
 
     @Override
     public Projeto findById(BigInteger id) {
-        return provider.findById(id).orElseThrow(() -> new RuntimeException("Não Encontrado"));
+        return provider.findById(id).orElseThrow(() -> new RecNotFountException(id));
     }
 
     @Override

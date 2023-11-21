@@ -2,6 +2,7 @@ package com.rodrigocarvalho.projectmanager.core.usecase.Impl;
 
 import com.rodrigocarvalho.projectmanager.core.dataprovider.MembroProvider;
 import com.rodrigocarvalho.projectmanager.core.domain.Membro;
+import com.rodrigocarvalho.projectmanager.core.exception.RecNotFountException;
 import com.rodrigocarvalho.projectmanager.core.usecase.MembroUseCase;
 
 import java.math.BigInteger;
@@ -22,7 +23,7 @@ public class MembroUseCaseImpl implements MembroUseCase {
 
     @Override
     public Membro findById(BigInteger projetoId, BigInteger pessoaId) {
-        return provider.findById(projetoId, pessoaId).orElseThrow(() -> new RuntimeException("Não Encontrado"));
+        return provider.findById(projetoId, pessoaId).orElseThrow(() -> new RecNotFountException(pessoaId));
     }
 
     @Override

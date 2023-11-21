@@ -7,6 +7,7 @@ import com.rodrigocarvalho.projectmanager.entrypoint.controller.request.PessoaRe
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.response.PessoaResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,7 @@ public class PessoaController {
     public ResponseEntity<PessoaResponse> findById(@PathVariable final BigInteger id) {
         var pessoa = pessoaUseCase.findById(id);
         var pessoaResponse = pessoaMapper.toPessoaResponse(pessoa);
+
         return ResponseEntity.ok().body(pessoaResponse);
     }
 
@@ -43,6 +45,7 @@ public class PessoaController {
     public ResponseEntity<List<PessoaResponse>> findAll() {
         var pessoas = pessoaUseCase.findAll();
         var pessoaResponse = pessoaMapper.toPessoaResponseList(pessoas);
+
         return ResponseEntity.ok().body(pessoaResponse);
     }
 
@@ -50,6 +53,7 @@ public class PessoaController {
     public ResponseEntity<List<PessoaResponse>> findbyAttributes(@RequestBody Pessoa pessoa) {
         var pessoas = pessoaUseCase.findByAttributes(pessoa);
         var pessoaResponse = pessoaMapper.toPessoaResponseList(pessoas);
+
         return ResponseEntity.ok().body(pessoaResponse);
     }
 
@@ -57,6 +61,7 @@ public class PessoaController {
     public ResponseEntity<List<PessoaResponse>> findById(@PathVariable final String nome) {
         var pessoas = pessoaUseCase.findByNome(nome);
         var pessoaResponse = pessoaMapper.toPessoaResponseList(pessoas);
+
         return ResponseEntity.ok().body(pessoaResponse);
     }
 
@@ -75,9 +80,10 @@ public class PessoaController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> delete(@PathVariable BigInteger id) {
         pessoaUseCase.delete(id);
+
         return ResponseEntity.ok().build();
     }
-
 }

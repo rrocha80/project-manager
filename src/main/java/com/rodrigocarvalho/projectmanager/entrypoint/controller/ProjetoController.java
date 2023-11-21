@@ -1,6 +1,8 @@
 package com.rodrigocarvalho.projectmanager.entrypoint.controller;
 
 import com.rodrigocarvalho.projectmanager.core.domain.Projeto;
+import com.rodrigocarvalho.projectmanager.core.exception.BusinessException;
+import com.rodrigocarvalho.projectmanager.core.exception.RecNotFountException;
 import com.rodrigocarvalho.projectmanager.core.usecase.ProjetoUseCase;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.mapper.ProjetoMapper;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.request.ProjetoRequest;
@@ -34,15 +36,21 @@ public class ProjetoController {
 
     @GetMapping("/search/{id}")
     public ResponseEntity<ProjetoResponse> findById(@PathVariable final BigInteger id) {
-        var projeto = projetoUseCase.findById(id);
-        var projetoResponse = projetoMapper.toProjetoResponse(projeto);
-        return ResponseEntity.ok().body(projetoResponse);
+        try {
+            var projeto = projetoUseCase.findById(id);
+            var projetoResponse = projetoMapper.toProjetoResponse(projeto);
+
+            return ResponseEntity.ok().body(projetoResponse);
+        } catch (RecNotFountException e) {
+            throw new BusinessException(e.getMessage(), e);
+        }
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<ProjetoResponse>> findAll() {
         var projetos = projetoUseCase.findAll();
         var projetoResponse = projetoMapper.toProjetoResponseList(projetos);
+
         return ResponseEntity.ok().body(projetoResponse);
     }
 
@@ -50,6 +58,7 @@ public class ProjetoController {
     public ResponseEntity<List<ProjetoResponse>> findbyAttributes(@RequestBody Projeto projeto) {
         var projetos = projetoUseCase.findByAttributes(projeto);
         var projetoResponse = projetoMapper.toProjetoResponseList(projetos);
+
         return ResponseEntity.ok().body(projetoResponse);
     }
 
@@ -57,6 +66,7 @@ public class ProjetoController {
     public ResponseEntity<List<ProjetoResponse>> findById(@PathVariable final String nome) {
         var projetos = projetoUseCase.findByNome(nome);
         var projetoResponse = projetoMapper.toProjetoResponseList(projetos);
+
         return ResponseEntity.ok().body(projetoResponse);
     }
 
@@ -77,6 +87,7 @@ public class ProjetoController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable BigInteger id) {
         projetoUseCase.delete(id);
+
         return ResponseEntity.ok().build();
     }
 }
