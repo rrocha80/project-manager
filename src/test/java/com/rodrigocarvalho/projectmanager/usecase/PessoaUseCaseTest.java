@@ -1,7 +1,6 @@
 package com.rodrigocarvalho.projectmanager.usecase;
 
 import com.rodrigocarvalho.projectmanager.core.dataprovider.PessoaProvider;
-import com.rodrigocarvalho.projectmanager.core.domain.Enum.CargoEnum;
 import com.rodrigocarvalho.projectmanager.core.usecase.Impl.PessoaUseCaseImpl;
 import com.rodrigocarvalho.projectmanager.core.usecase.PessoaUseCase;
 import org.junit.jupiter.api.Assertions;
@@ -35,7 +34,7 @@ public class PessoaUseCaseTest {
     void inserirPessoa() {
 
         useCase.insert(buildMockInsertPessoa());
-        Assertions.assertEquals(CargoEnum.DESENVOLVEDOR, buildMockInsertPessoa().getCargo());
+        Assertions.assertEquals("Giovany", buildMockInsertPessoa().getNome());
 
     }
 

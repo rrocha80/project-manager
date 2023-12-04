@@ -1,6 +1,5 @@
-package com.rodrigocarvalho.projectmanager.core.exception;
+package com.rodrigocarvalho.projectmanager.config.exception;
 
-//@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class BusinessException extends RuntimeException{
 
     private static final long serialVersionUID = 1L;

@@ -1,4 +1,4 @@
-package com.rodrigocarvalho.projectmanager.core.exception;
+package com.rodrigocarvalho.projectmanager.config.exception;
 
 import java.math.BigInteger;
 

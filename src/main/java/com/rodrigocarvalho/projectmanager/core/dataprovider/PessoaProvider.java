@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PessoaProvider {
-    void insert(Pessoa pessoa);
+    Pessoa insert(Pessoa pessoa);
 
     Optional<Pessoa> findById(final BigInteger id);
 
@@ -20,4 +20,6 @@ public interface PessoaProvider {
     Pessoa update(Pessoa pessoa);
 
     void delete(final BigInteger id);
+
+    Pessoa findByCpf(String cpf);
 }

@@ -1,19 +1,19 @@
 package com.rodrigocarvalho.projectmanager.entrypoint.controller.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.rodrigocarvalho.projectmanager.core.domain.Enum.RiscoEnum;
 import com.rodrigocarvalho.projectmanager.core.domain.Enum.StatusEnum;
 import com.rodrigocarvalho.projectmanager.dataprovider.repository.entity.PessoaEntity;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
 @Data
-@AllArgsConstructor
 public class ProjetoRequest {
 
     private BigInteger id;
 
+    @JsonProperty("nome")
     private String nome;
 
     private LocalDate dataInicio;

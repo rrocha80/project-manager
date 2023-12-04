@@ -1,6 +1,5 @@
 package com.rodrigocarvalho.projectmanager.dataprovider.repository.entity;
 
-import com.rodrigocarvalho.projectmanager.core.domain.Enum.CargoEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -18,13 +17,15 @@ public class PessoaEntity {
     @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "cargo", nullable = false)
-    private CargoEnum cargo;
+    @Column(name = "cpf")
+    private String cpf;
 
     @Column(name = "datanascimento")
     private LocalDate dataNascimento;
 
-    @Column(name = "prjectfuncionario")
-    private Boolean prjectFuncionario;
+    @Column(name = "funcionario")
+    private Boolean funcionario;
+
+    @Column(name = "gerente")
+    private Boolean gerente;
 }

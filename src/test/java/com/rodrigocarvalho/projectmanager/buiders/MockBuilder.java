@@ -16,9 +16,10 @@ public class MockBuilder {
         Pessoa pessoa = new Pessoa();
         pessoa.setId(BigInteger.valueOf(7));
         pessoa.setNome("Giovany");
-        pessoa.setCargo(CargoEnum.DESENVOLVEDOR);
+        pessoa.setCpf("00011122291");
         pessoa.setDataNascimento(LocalDate.of(2000, 10, 01));
-        pessoa.setPrjectFuncionario(false);
+        pessoa.setFuncionario(false);
+        pessoa.setGerente(true);
 
         List<Pessoa> pessoas = new ArrayList<>();
 
@@ -31,9 +32,10 @@ public class MockBuilder {
         Pessoa pessoa = new Pessoa();
         pessoa.setId(BigInteger.valueOf(7));
         pessoa.setNome("Giovany");
-        pessoa.setCargo(CargoEnum.DESENVOLVEDOR);
+        pessoa.setCpf("00011122291");
         pessoa.setDataNascimento(LocalDate.of(2000, 10, 01));
-        pessoa.setPrjectFuncionario(false);
+        pessoa.setFuncionario(false);
+        pessoa.setGerente(true);
 
         return pessoa;
     }
@@ -41,9 +43,10 @@ public class MockBuilder {
     public static Pessoa buildMockInsertPessoa() {
         Pessoa pessoa = new Pessoa();
         pessoa.setNome("Giovany");
-        pessoa.setCargo(CargoEnum.DESENVOLVEDOR);
+        pessoa.setCpf("00011122291");
         pessoa.setDataNascimento(LocalDate.of(2000, 10, 01));
-        pessoa.setPrjectFuncionario(false);
+        pessoa.setFuncionario(false);
+        pessoa.setGerente(true);
 
         return pessoa;
     }

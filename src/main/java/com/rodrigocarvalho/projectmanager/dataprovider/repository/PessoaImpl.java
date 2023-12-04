@@ -5,6 +5,7 @@ import com.rodrigocarvalho.projectmanager.core.domain.Pessoa;
 import com.rodrigocarvalho.projectmanager.dataprovider.repository.mapper.PessoaEntityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
@@ -22,9 +23,10 @@ public class PessoaImpl implements PessoaProvider {
     private PessoaEntityMapper pessoaEntityMapper;
 
     @Override
-    public void insert(Pessoa pessoa) {
+    public Pessoa insert(Pessoa pessoa) {
         var pessoaEntity = pessoaEntityMapper.toPessoaEntity(pessoa);
         repository.save(pessoaEntity);
+        return pessoa;
     }
 
     @Override
@@ -44,7 +46,9 @@ public class PessoaImpl implements PessoaProvider {
     @Override
     public List<Pessoa> findByAttributes(Pessoa pessoa) {
         var pessoaEntity = pessoaEntityMapper.toPessoaEntity(pessoa);
-        var pessoas = repository.findAll(Example.of(pessoaEntity));
+        var pessoas = repository.findAll(Example.of(pessoaEntity, ExampleMatcher.matching()
+                .withIgnoreCase()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)));
         List<Pessoa> list = new ArrayList<>();
         pessoas.forEach(p -> list.add(pessoaEntityMapper.toPessoa(p)));
         return list;
@@ -68,5 +72,12 @@ public class PessoaImpl implements PessoaProvider {
     @Override
     public void delete(BigInteger id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public Pessoa findByCpf(String cpf) {
+        var pessoaEntity = repository.findByCpf(cpf);
+        var pessoa = pessoaEntityMapper.toPessoa(pessoaEntity);
+        return pessoa;
     }
 }

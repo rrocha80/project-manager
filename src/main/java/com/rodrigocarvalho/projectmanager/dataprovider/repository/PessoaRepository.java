@@ -11,4 +11,6 @@ import java.util.List;
 public interface PessoaRepository extends JpaRepository<PessoaEntity, BigInteger> {
 
     List<PessoaEntity> findByNomeContaining(String pessoa);
+
+    PessoaEntity findByCpf(String cpf);
 }

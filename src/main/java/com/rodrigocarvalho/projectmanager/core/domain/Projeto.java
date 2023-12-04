@@ -5,6 +5,7 @@ import com.rodrigocarvalho.projectmanager.core.domain.Enum.StatusEnum;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Projeto {
 
@@ -12,8 +13,7 @@ public class Projeto {
 
     public Projeto(BigInteger id){this.id = id;}
 
-    public Projeto(BigInteger id, String nome, LocalDate dataInicio, LocalDate dataPrevisao, LocalDate dataFim
-            , String descricao, StatusEnum status, Float orcamento, RiscoEnum risco, Pessoa gerente) {
+    public Projeto(BigInteger id, String nome, LocalDate dataInicio, LocalDate dataPrevisao, LocalDate dataFim, String descricao, StatusEnum status, Float orcamento, RiscoEnum risco, Pessoa gerente, List<Pessoa> membros) {
         this.id = id;
         this.nome = nome;
         this.dataInicio = dataInicio;
@@ -24,6 +24,7 @@ public class Projeto {
         this.orcamento = orcamento;
         this.risco = risco;
         this.gerente = gerente;
+        this.membros = membros;
     }
 
     private BigInteger id;
@@ -36,6 +37,7 @@ public class Projeto {
     private Float orcamento;
     private RiscoEnum risco;
     private Pessoa gerente;
+    private List<Pessoa> membros;
 
     public BigInteger getId() {
         return id;
@@ -115,5 +117,13 @@ public class Projeto {
 
     public void setGerente(Pessoa gerente) {
         this.gerente = gerente;
+    }
+
+    public List<Pessoa> getMembros() {
+        return membros;
+    }
+
+    public void setMembros(List<Pessoa> membros) {
+        this.membros = membros;
     }
 }

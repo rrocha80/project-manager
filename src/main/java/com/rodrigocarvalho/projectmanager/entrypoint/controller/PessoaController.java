@@ -15,6 +15,9 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Objects;
 
+@CrossOrigin(
+        "*"
+)
 @RestController
 @RequestMapping("/v1/pessoa")
 public class PessoaController {
@@ -26,11 +29,11 @@ public class PessoaController {
     private PessoaMapper pessoaMapper;
 
     @PostMapping("/insert")
-    public ResponseEntity<Void> insert(@Valid @RequestBody PessoaRequest pessoaRequest) {
+    public ResponseEntity<PessoaResponse> insert(@Valid @RequestBody PessoaRequest pessoaRequest) {
         var pessoa = pessoaMapper.toPessoa(pessoaRequest);
         pessoaUseCase.insert(pessoa);
-
-        return ResponseEntity.ok().build();
+        var pessoaResponse = pessoaMapper.toPessoaResponse(pessoa);
+        return ResponseEntity.ok(pessoaResponse);
     }
 
     @GetMapping("/search/{id}")
@@ -46,15 +49,15 @@ public class PessoaController {
         var pessoas = pessoaUseCase.findAll();
         var pessoaResponse = pessoaMapper.toPessoaResponseList(pessoas);
 
-        return ResponseEntity.ok().body(pessoaResponse);
+        return ResponseEntity.ok(pessoaResponse);
     }
 
-    @GetMapping("/byattributes")
+    @PostMapping("/byattributes")
     public ResponseEntity<List<PessoaResponse>> findbyAttributes(@RequestBody Pessoa pessoa) {
         var pessoas = pessoaUseCase.findByAttributes(pessoa);
         var pessoaResponse = pessoaMapper.toPessoaResponseList(pessoas);
 
-        return ResponseEntity.ok().body(pessoaResponse);
+        return ResponseEntity.ok(pessoaResponse);
     }
 
     @GetMapping("/searchname/{nome}")

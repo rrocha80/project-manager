@@ -1,12 +1,14 @@
 package com.rodrigocarvalho.projectmanager.core.usecase.Impl;
 
+import com.rodrigocarvalho.projectmanager.config.exception.BusinessException;
 import com.rodrigocarvalho.projectmanager.core.dataprovider.PessoaProvider;
 import com.rodrigocarvalho.projectmanager.core.domain.Pessoa;
-import com.rodrigocarvalho.projectmanager.core.exception.RecNotFountException;
+import com.rodrigocarvalho.projectmanager.config.exception.RecNotFountException;
 import com.rodrigocarvalho.projectmanager.core.usecase.PessoaUseCase;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Objects;
 
 public class PessoaUseCaseImpl implements PessoaUseCase {
     private final PessoaProvider provider;
@@ -16,8 +18,13 @@ public class PessoaUseCaseImpl implements PessoaUseCase {
     }
 
     @Override
-    public void insert(Pessoa pessoa) {
-        provider.insert(pessoa);
+    public Pessoa insert(Pessoa pessoa) {
+        var result = findByCpf(pessoa.getCpf());
+
+        if (Objects.nonNull(result)) {
+            throw new BusinessException("Pessoa já cadastrada com este CPF");
+        }
+        return provider.insert(pessoa);
     }
 
     @Override
@@ -51,4 +58,10 @@ public class PessoaUseCaseImpl implements PessoaUseCase {
     public List<Pessoa> findByNome(String nome) {
         return provider.findByNome(nome);
     }
+
+    @Override
+    public Pessoa findByCpf(String cpf) {
+        return provider.findByCpf(cpf);
+    }
+
 }

@@ -1,8 +1,8 @@
 package com.rodrigocarvalho.projectmanager.entrypoint.controller;
 
+import com.rodrigocarvalho.projectmanager.config.exception.BusinessException;
+import com.rodrigocarvalho.projectmanager.config.exception.RecNotFountException;
 import com.rodrigocarvalho.projectmanager.core.domain.Projeto;
-import com.rodrigocarvalho.projectmanager.core.exception.BusinessException;
-import com.rodrigocarvalho.projectmanager.core.exception.RecNotFountException;
 import com.rodrigocarvalho.projectmanager.core.usecase.ProjetoUseCase;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.mapper.ProjetoMapper;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.request.ProjetoRequest;
@@ -54,12 +54,12 @@ public class ProjetoController {
         return ResponseEntity.ok().body(projetoResponse);
     }
 
-    @GetMapping("/byattributes")
+    @PostMapping("/byattributes")
     public ResponseEntity<List<ProjetoResponse>> findbyAttributes(@RequestBody Projeto projeto) {
         var projetos = projetoUseCase.findByAttributes(projeto);
         var projetoResponse = projetoMapper.toProjetoResponseList(projetos);
 
-        return ResponseEntity.ok().body(projetoResponse);
+        return ResponseEntity.ok(projetoResponse);
     }
 
     @GetMapping("/searchname/{nome}")
@@ -67,7 +67,7 @@ public class ProjetoController {
         var projetos = projetoUseCase.findByNome(nome);
         var projetoResponse = projetoMapper.toProjetoResponseList(projetos);
 
-        return ResponseEntity.ok().body(projetoResponse);
+        return ResponseEntity.ok(projetoResponse);
     }
 
     @PutMapping("/update")

@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -20,30 +21,38 @@ public class ProjetoEntity {
     @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Column(name = "data_inicio", nullable = false)
+    @Column(name = "data_inicio")
     private LocalDate dataInicio;
 
-    @Column(name = "data_previsao_fim", nullable = false)
+    @Column(name = "data_previsao_fim")
     private LocalDate dataPrevisao;
 
-    @Column(name = "data_fim", nullable = false)
+    @Column(name = "data_fim")
     private LocalDate dataFim;
 
-    @Column(name = "descricao", nullable = false)
+    @Column(name = "descricao")
     private String descricao;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
+    @Column(name = "status")
     private StatusEnum status;
 
-    @Column(name = "orcamento", nullable = false)
+    @Column(name = "orcamento")
     private Float orcamento;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "risco", nullable = false)
+    @Column(name = "risco")
     private RiscoEnum risco;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idgerente", nullable = false)
     private PessoaEntity gerente;
+
+    @ManyToMany()
+    @JoinTable(
+            name = "membros",
+            joinColumns = @JoinColumn(name = "idprojeto"),
+            inverseJoinColumns = @JoinColumn(name = "idpessoa")
+    )
+    private List<PessoaEntity> membros;
 }

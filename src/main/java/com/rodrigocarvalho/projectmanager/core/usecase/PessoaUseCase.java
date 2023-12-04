@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PessoaUseCase {
 
-    void insert(Pessoa pessoa);
+    Pessoa insert(Pessoa pessoa);
 
     Pessoa findById(final BigInteger id);
 
@@ -20,4 +20,6 @@ public interface PessoaUseCase {
     void delete(final BigInteger id);
 
     List<Pessoa> findByNome(String nome);
+
+    Pessoa findByCpf(String cpf);
 }
