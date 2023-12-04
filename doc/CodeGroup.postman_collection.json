@@ -138,6 +138,61 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "/v1/pessoa/byattributes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cargo\": \"QA\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/v1/pessoa/byattributes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"pessoa",
+								"byattributes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/v1/pessoa/searchname/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/v1/pessoa/searchname/ova",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"pessoa",
+								"searchname",
+								"ova"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -151,7 +206,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\": \"Teste01\",\n    \"dataInicio\": \"2023-01-10\",\n    \"dataPrevisao\": \"2023-05-30\",\n    \"dataFim\": \"2023-06-05\",\n    \"descricao\": \"Teste de Projeto para implantação\",\n    \"status\": \"EM_ANALISE\",\n    \"orcamento\": \"500000\",\n    \"risco\": \"MEDIO_RISCO\",\n    \"gerente\": {\n        \"id\": 4,\n        \"nome\": \"Mario\",\n        \"cargo\": \"GERENTE\"\n    }\n}",
+							"raw": "{\n    \"nome\": \"Teste01\",\n    \"dataInicio\": \"2023-01-10\",\n    \"dataPrevisao\": \"2023-05-30\",\n    \"dataFim\": \"2023-06-05\",\n    \"descricao\": \"Teste de Projeto para implantação\",\n    \"status\": \"EM_ANALISE\",\n    \"orcamento\": \"500000\",\n    \"risco\": \"MEDIO_RISCO\",\n    \"gerente\": {\n        \"id\": 12\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -196,7 +251,7 @@
 					"response": []
 				},
 				{
-					"name": "/v1/projeto/delete/8",
+					"name": "/v1/projeto/delete",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -242,6 +297,80 @@
 								"v1",
 								"projeto",
 								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/v1/projeto/byattributes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"gerente\": {\n            \"id\": 10\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/v1/projeto/byattributes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"projeto",
+								"byattributes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/v1/projeto/searchname",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/v1/projeto/searchname/est",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"projeto",
+								"searchname",
+								"est"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/v1/projeto/search/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/v1/projeto/search/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"projeto",
+								"search",
+								"7"
 							]
 						}
 					},
