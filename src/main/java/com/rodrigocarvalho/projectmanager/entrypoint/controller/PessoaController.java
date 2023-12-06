@@ -2,6 +2,7 @@ package com.rodrigocarvalho.projectmanager.entrypoint.controller;
 
 import com.rodrigocarvalho.projectmanager.core.domain.Pessoa;
 import com.rodrigocarvalho.projectmanager.core.usecase.PessoaUseCase;
+import com.rodrigocarvalho.projectmanager.dataprovider.repository.exception.ResourceNotFoundException;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.mapper.PessoaMapper;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.request.PessoaRequest;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.response.PessoaResponse;
@@ -85,7 +86,11 @@ public class PessoaController {
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> delete(@PathVariable BigInteger id) {
-        pessoaUseCase.delete(id);
+        try {
+            pessoaUseCase.delete(id);
+        } catch (RuntimeException e) {
+            throw new ResourceNotFoundException(e.getMessage());
+        }
 
         return ResponseEntity.ok().build();
     }

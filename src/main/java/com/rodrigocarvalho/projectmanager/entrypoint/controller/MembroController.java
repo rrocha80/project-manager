@@ -1,9 +1,16 @@
 package com.rodrigocarvalho.projectmanager.entrypoint.controller;
 
+import com.rodrigocarvalho.projectmanager.core.dataprovider.PessoaProvider;
+import com.rodrigocarvalho.projectmanager.core.dataprovider.ProjetoProvider;
 import com.rodrigocarvalho.projectmanager.core.domain.Membro;
 import com.rodrigocarvalho.projectmanager.core.domain.Pessoa;
 import com.rodrigocarvalho.projectmanager.core.domain.Projeto;
 import com.rodrigocarvalho.projectmanager.core.usecase.MembroUseCase;
+import com.rodrigocarvalho.projectmanager.core.usecase.PessoaUseCase;
+import com.rodrigocarvalho.projectmanager.core.usecase.ProjetoUseCase;
+import com.rodrigocarvalho.projectmanager.dataprovider.repository.PessoaRepository;
+import com.rodrigocarvalho.projectmanager.dataprovider.repository.ProjetoRepository;
+import com.rodrigocarvalho.projectmanager.dataprovider.repository.exception.ResourceNotFoundException;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.mapper.MembroMapper;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.request.MembroRequest;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.response.MembroResponse;
@@ -25,13 +32,24 @@ public class MembroController {
     @Autowired
     private MembroMapper membroMapper;
 
+    @Autowired
+    private PessoaUseCase pessoaUseCase;
+
+    @Autowired
+    private ProjetoUseCase projetoUseCase;
+
     @PostMapping("/insert")
     public ResponseEntity<Void> insert(@Valid @RequestBody MembroRequest membroRequest) {
-        //var membro = membroMapper.toMembro(membroRequest);
-        Membro membro = new Membro();
-        membro.setProjeto(new Projeto(membroRequest.getProjeto().getId()));
-        membro.setPessoa(new Pessoa(membroRequest.getPessoa().getId()));
-        membroUseCase.insert(membro);
+        try{
+            Membro membro = new Membro();
+            var pessoas = pessoaUseCase.findByAttributes(membroRequest.getPessoa());
+            var projeto = projetoUseCase.findById(membroRequest.getProjeto().getId());
+            membro.setProjeto(projeto);
+            membro.setPessoa(pessoas.get(0));
+            membroUseCase.insert(membro);
+        } catch (RuntimeException e) {
+            throw new ResourceNotFoundException(e.getMessage());
+        }
 
         return ResponseEntity.ok().build();
     }

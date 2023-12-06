@@ -26,7 +26,7 @@ public class ProjetoRequest {
 
     private StatusEnum status;
 
-    private float orcamento;
+    private Float orcamento;
 
     private RiscoEnum risco;
 

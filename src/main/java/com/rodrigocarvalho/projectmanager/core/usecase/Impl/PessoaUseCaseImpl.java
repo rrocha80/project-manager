@@ -5,6 +5,7 @@ import com.rodrigocarvalho.projectmanager.core.dataprovider.PessoaProvider;
 import com.rodrigocarvalho.projectmanager.core.domain.Pessoa;
 import com.rodrigocarvalho.projectmanager.config.exception.RecNotFountException;
 import com.rodrigocarvalho.projectmanager.core.usecase.PessoaUseCase;
+import com.rodrigocarvalho.projectmanager.dataprovider.repository.exception.ResourceNotFoundException;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -12,6 +13,9 @@ import java.util.Objects;
 
 public class PessoaUseCaseImpl implements PessoaUseCase {
     private final PessoaProvider provider;
+    private final String IMPOSSIVEL_REMOVER_PESSOA =  "Não é possível remover a pessoa, pois está vinculada a um ou "
+        + "mais projetos.";
+    private final String IMPOSSIVEL_INSERIR_PESSOA =  "Pessoa já cadastrada com este CPF";
 
     public PessoaUseCaseImpl(PessoaProvider insertPessoa) {
         this.provider = insertPessoa;
@@ -22,7 +26,7 @@ public class PessoaUseCaseImpl implements PessoaUseCase {
         var result = findByCpf(pessoa.getCpf());
 
         if (Objects.nonNull(result)) {
-            throw new BusinessException("Pessoa já cadastrada com este CPF");
+            throw new BusinessException(IMPOSSIVEL_INSERIR_PESSOA);
         }
         return provider.insert(pessoa);
     }
@@ -51,7 +55,11 @@ public class PessoaUseCaseImpl implements PessoaUseCase {
     @Override
     public void delete(BigInteger id) {
         findById(id);
-        provider.delete(id);
+        try {
+            provider.delete(id);
+        } catch (RuntimeException e) {
+            throw new RuntimeException(IMPOSSIVEL_REMOVER_PESSOA);
+        }
     }
 
     @Override

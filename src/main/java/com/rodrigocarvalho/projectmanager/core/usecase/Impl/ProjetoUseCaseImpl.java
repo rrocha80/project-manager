@@ -13,6 +13,9 @@ public class ProjetoUseCaseImpl implements ProjetoUseCase {
 
     private final ProjetoProvider provider;
 
+    private final String IMPOSSIVEL_REMOVER_PROJETO = "Não é permitido remover projetos nos seguintes status: "
+        + "(Iniciado, Em andamento ou Encerrado).";
+
     public ProjetoUseCaseImpl(ProjetoProvider provider) {
         this.provider = provider;
     }
@@ -45,9 +48,9 @@ public class ProjetoUseCaseImpl implements ProjetoUseCase {
         StatusEnum status = projeto.getStatus();
 
         switch (status){
-            case INICIADO, EM_ANDAMENTO, ENCERRADO:
-                new RuntimeException("Não é permitido remover o projeto.");
-                break;
+            case INICIADO, EM_ANDAMENTO, ENCERRADO: {
+                throw new RuntimeException(IMPOSSIVEL_REMOVER_PROJETO);
+            }
             default: provider.delete(id);
         }
     }

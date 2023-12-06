@@ -12,6 +12,8 @@ public class MembroUseCaseImpl implements MembroUseCase {
 
     private final MembroProvider provider;
 
+    private final String IMPOSSIVEL_VINCULAR_MEMBRO = "Não é possivel vincular este membro, pois não é um funcionário.";
+
     public MembroUseCaseImpl(MembroProvider provider) {
         this.provider = provider;
     }
@@ -19,7 +21,7 @@ public class MembroUseCaseImpl implements MembroUseCase {
     @Override
     public void insert(Membro membro) {
         if (membro.getPessoa().getFuncionario() == false) {
-            throw new RecNotFountException("A pessoa não é funcionário.");
+            throw new RecNotFountException(IMPOSSIVEL_VINCULAR_MEMBRO);
         }
         provider.insert(membro);
     }

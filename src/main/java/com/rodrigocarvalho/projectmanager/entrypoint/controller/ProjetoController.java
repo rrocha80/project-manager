@@ -4,13 +4,17 @@ import com.rodrigocarvalho.projectmanager.config.exception.BusinessException;
 import com.rodrigocarvalho.projectmanager.config.exception.RecNotFountException;
 import com.rodrigocarvalho.projectmanager.core.domain.Projeto;
 import com.rodrigocarvalho.projectmanager.core.usecase.ProjetoUseCase;
+import com.rodrigocarvalho.projectmanager.dataprovider.repository.exception.GlobalExceptionHandler;
+import com.rodrigocarvalho.projectmanager.dataprovider.repository.exception.ResourceNotFoundException;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.mapper.ProjetoMapper;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.request.ProjetoRequest;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.response.ProjetoResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -41,8 +45,8 @@ public class ProjetoController {
             var projetoResponse = projetoMapper.toProjetoResponse(projeto);
 
             return ResponseEntity.ok().body(projetoResponse);
-        } catch (RecNotFountException e) {
-            throw new BusinessException(e.getMessage(), e);
+        } catch (RuntimeException e) {
+            throw new ResourceNotFoundException(e.getMessage());
         }
     }
 
@@ -86,7 +90,12 @@ public class ProjetoController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable BigInteger id) {
-        projetoUseCase.delete(id);
+        try {
+            projetoUseCase.delete(id);
+        } catch (RuntimeException e) {
+            throw new ResourceNotFoundException(e.getMessage());
+        }
+
 
         return ResponseEntity.ok().build();
     }
