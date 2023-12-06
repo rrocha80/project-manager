@@ -38,7 +38,6 @@ public class MembroUseCaseImpl implements MembroUseCase {
 
     @Override
     public void delete(BigInteger projetoId, BigInteger pessoaId) {
-        findById(projetoId, pessoaId);
         provider.delete(projetoId, pessoaId);
 
     }

@@ -6,6 +6,7 @@ import com.rodrigocarvalho.projectmanager.dataprovider.repository.exception.Reso
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.mapper.PessoaMapper;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.request.PessoaRequest;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.response.PessoaResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -69,6 +70,7 @@ public class PessoaController {
         return ResponseEntity.ok().body(pessoaResponse);
     }
 
+    @Operation(summary = "Atualizar pessoa")
     @PutMapping("/update")
     public ResponseEntity<PessoaResponse> update(@Valid @RequestBody PessoaRequest pessoaRequest) {
         var pessoa = pessoaMapper.toPessoa(pessoaRequest);

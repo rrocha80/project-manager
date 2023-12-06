@@ -52,7 +52,11 @@ public class MembroImpl implements MembroProvider {
 
     @Override
     public void delete(BigInteger projetoId, BigInteger pessoaId) {
-        var membroEntity = findById(projetoId, pessoaId);
-        repository.deleteById(membroEntity.get().getId());
+        var projeto = projetoRepository.findById(projetoId);
+        var pessoa = pessoaRepository.findById(pessoaId);
+        var membro = findById(projeto.get().getId(), pessoa.get().getId());
+        var membroEntity = membroEntityMapper.toMembroEntity(membro.get());
+
+        repository.delete(membroEntity);
     }
 }

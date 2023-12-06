@@ -14,6 +14,7 @@ import com.rodrigocarvalho.projectmanager.dataprovider.repository.exception.Reso
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.mapper.MembroMapper;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.request.MembroRequest;
 import com.rodrigocarvalho.projectmanager.entrypoint.controller.response.MembroResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,7 @@ public class MembroController {
     @Autowired
     private ProjetoUseCase projetoUseCase;
 
+    @Operation(summary = "request body => { \"projeto\": { \"id\": {id do projeto}, \"pessoa\": { \"nome\": \"{nome exato da pessoa}\" } }")
     @PostMapping("/insert")
     public ResponseEntity<Void> insert(@Valid @RequestBody MembroRequest membroRequest) {
         try{
